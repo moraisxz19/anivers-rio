@@ -1,310 +1,292 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maria Clara - 15 anos ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maria Clara - 15 anos ❤️</title>
 
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
-      background: black;
-      color: white;
-    }
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  background: black;
+  color: white;
+}
 
-    /* INTRO */
-    #intro {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      background: radial-gradient(circle, #ff4e50, #000);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 10;
-      animation: fadeOut 3s ease forwards;
-      animation-delay: 4s;
-    }
+/* INTRO */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(circle, #ff4e50, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+  animation: fadeOut 3s ease forwards;
+  animation-delay: 4s;
+}
 
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
 
-    #intro h1 {
-      font-size: 3em;
-      text-align: center;
-      animation: zoom 3s ease;
-    }
+#intro h1 {
+  font-size: 3em;
+  text-align: center;
+  animation: zoom 3s ease;
+}
 
-    @keyframes zoom {
-      from { transform: scale(0.5); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
+@keyframes zoom {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
-    header {
-      padding: 40px;
-      text-align: center;
-      font-size: 2.5em;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    }
+header {
+  padding: 40px;
+  text-align: center;
+  font-size: 2.5em;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+}
 
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
+/* MENU */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
 
-    .card {
-      background: white;
-      color: black;
-      border-radius: 20px;
-      padding: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-      font-weight: bold;
-    }
+.card {
+  background: white;
+  color: black;
+  border-radius: 20px;
+  padding: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  font-weight: bold;
+}
 
-    .card:hover {
-      transform: scale(1.1) rotate(1deg);
-    }
+.card:hover {
+  transform: scale(1.1) rotate(1deg);
+}
 
-    .container {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-    }
+/* PAGES */
+.container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
 
-    .page {
-      display: none;
-      padding: 0;
-      min-height: 100vh;
-      text-align: center;
-      min-width: 100vw;
-      scroll-snap-align: start;
-    }
+.page {
+  display: none;
+  padding: 40px;
+  min-height: 100vh;
+  text-align: center;
+  min-width: 100vw;
+  scroll-snap-align: start;
+}
 
-    .active { display: block; }
+.active { display: block; }
 
-    .topo-img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-    }
+/* GALERIA */
+.galeria {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
 
-    .conteudo {
-      padding: 30px;
-    }
+.galeria img {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+}
 
-    button {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 20px;
-      font-size: 1em;
-    }
+/* CARTA */
+.carta-box {
+  display: none;
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  animation: aparecer 0.5s ease;
+}
 
-    .galeria {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
+/* PRESENTE */
+.presente {
+  font-size: 60px;
+  cursor: pointer;
+}
 
-    .galeria img {
-      width: 150px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 15px;
-      transition: 0.3s;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    }
+#mensagem-amor {
+  font-size: 50px;
+  color: #ff004c;
+  display: none;
+}
 
-    .galeria img:hover {
-      transform: scale(1.05);
-    }
+/* THEMES */
+.rapunzel { background: linear-gradient(135deg, #fbc2eb, #a6c1ee); }
+.spiderman { background: linear-gradient(135deg, #ff416c, #000000); }
+.ralph { background: linear-gradient(135deg, #f7971e, #ffd200); }
+.peppa { background: linear-gradient(135deg, #ff9ec4, #ffc3a0); }
+.carta { background: linear-gradient(135deg, #fff1eb, #ace0f9); }
+.final { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
 
-    .presente {
-      font-size: 60px;
-      cursor: pointer;
-      margin-top: 30px;
-    }
-
-    #mensagem-amor {
-      font-size: 50px;
-      color: #ff004c;
-      display: none;
-    }
-
-    /* CARTA */
-    #carta {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 20;
-    }
-
-    .envelope {
-      font-size: 80px;
-      cursor: pointer;
-    }
-
-    .carta-texto {
-      display: none;
-      background: white;
-      color: black;
-      padding: 20px;
-      border-radius: 15px;
-      max-width: 300px;
-      text-align: center;
-    }
-
-    /* THEMES */
-    .rapunzel { background: linear-gradient(135deg, #fbc2eb, #a6c1ee); }
-    .spiderman { background: linear-gradient(135deg, #ff416c, #000000); }
-    .ralph { background: linear-gradient(135deg, #f7971e, #ffd200); }
-    .peppa { background: linear-gradient(135deg, #ff9ec4, #ffc3a0); }
-    .grinch { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
-
-  </style>
+/* HEART */
+.heart {
+  position: fixed;
+  top: -10px;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(100vh); opacity: 0; }
+}
+</style>
 </head>
 
 <body>
-
-<!-- CARTA -->
-<div id="carta">
-  <div class="envelope" onclick="abrirCarta()">💌</div>
-  <div class="carta-texto" id="textoCarta">
-    Você é minha Rapunzel ✨<br>
-    Minha heroína como o Homem-Aranha 🕷️<br>
-    Minha melhor fase como o Ralph 🎮<br>
-    E minha alegria como a Peppa 🐷❤️
-  </div>
-</div>
 
 <div id="intro">
   <h1>Feliz Aniversário Meu Amor ❤️<br>15 anos 🎉</h1>
   <p>Prepare-se para uma surpresa...</p>
 </div>
 
-<header id="header">Você é meu mundo 💖</header>
+<header>Você é meu mundo 💖</header>
 
 <div id="menu" class="menu">
   <div class="card" onclick="showPage('rapunzel')">✨ Rapunzel</div>
   <div class="card" onclick="showPage('spiderman')">🕷️ Homem-Aranha</div>
   <div class="card" onclick="showPage('ralph')">🎮 Detona Ralph</div>
   <div class="card" onclick="showPage('peppa')">🐷 Peppa Pig</div>
-  <div class="card" onclick="showPage('grinch')">💙 Final</div>
+  <div class="card" onclick="showPage('carta')">💌 Carta</div>
+  <div class="card" onclick="showPage('final')">💙 Final</div>
 </div>
 
 <div class="container">
 
+<!-- RAPUNZEL -->
 <div id="rapunzel" class="page rapunzel">
-  <img class="topo-img" src="topo1.jpg">
-  <div class="conteudo">
   <h1>Você ilumina minha vida ✨</h1>
-  <p>Igual as lanternas da Rapunzel...</p>
   <div class="galeria">
-    <img src="foto1.jpg">
-    <img src="foto1b.jpg">
+    <img src="foto1.jpg"><img src="foto1b.jpg">
   </div>
   <button onclick="back()">Voltar</button>
-  </div>
 </div>
 
+<!-- SPIDERMAN -->
 <div id="spiderman" class="page spiderman">
-  <img class="topo-img" src="topo2.jpg">
-  <div class="conteudo">
   <h1>Minha heroína ❤️</h1>
   <div class="galeria">
-    <img src="foto2.jpg">
-    <img src="foto2b.jpg">
+    <img src="foto2.jpg"><img src="foto2b.jpg">
   </div>
   <button onclick="back()">Voltar</button>
-  </div>
 </div>
 
+<!-- RALPH -->
 <div id="ralph" class="page ralph">
-  <img class="topo-img" src="topo3.jpg">
-  <div class="conteudo">
   <h1>Você é minha melhor fase 🎮</h1>
   <div class="galeria">
-    <img src="foto3.jpg">
-    <img src="foto3b.jpg">
+    <img src="foto3.jpg"><img src="foto3b.jpg">
   </div>
   <button onclick="back()">Voltar</button>
-  </div>
 </div>
 
+<!-- PEPPA -->
 <div id="peppa" class="page peppa">
-  <img class="topo-img" src="topo4.jpg">
-  <div class="conteudo">
   <h1>Você é minha alegria 🐷💕</h1>
   <div class="galeria">
-    <img src="foto4.jpg">
-    <img src="foto4b.jpg">
+    <img src="foto4.jpg"><img src="foto4b.jpg">
   </div>
   <button onclick="back()">Voltar</button>
-  </div>
 </div>
 
-<div id="grinch" class="page grinch">
-  <img class="topo-img" src="topo5.jpg">
-  <div class="conteudo">
+<!-- CARTA -->
+<div id="carta" class="page carta">
+  <h1>💌 Clique para abrir a carta</h1>
+
+  <div onclick="toggleCarta()" style="cursor:pointer;font-size:50px;">✉️</div>
+
+  <div id="conteudoCarta" class="carta-box">
+    <p>
+      Você é minha Rapunzel ✨<br>
+      Minha heroína como o Homem-Aranha 🕷️<br>
+      Minha melhor fase como Detona Ralph 🎮<br>
+      E minha alegria como a Peppa 🐷<br><br>
+      Eu te amo muito ❤️
+    </p>
+  </div>
+
+  <button onclick="back()">Voltar</button>
+</div>
+
+<!-- FINAL -->
+<div id="final" class="page final">
   <h1>Você mudou minha vida 💙</h1>
-  <h2>Quer continuar essa história comigo?</h2>
 
   <div class="presente" onclick="abrirPresente()">🎁</div>
   <div id="mensagem-amor">EU TE AMO ❤️</div>
 
   <button onclick="back()">Voltar</button>
-  </div>
 </div>
 
 </div>
 
 <script>
-function abrirCarta() {
-  document.querySelector(".envelope").style.display = "none";
-  document.getElementById("textoCarta").style.display = "block";
-
-  setTimeout(() => {
-    document.getElementById("carta").style.display = "none";
-  }, 4000);
-}
-
 function showPage(id) {
   document.getElementById('menu').style.display = 'none';
-  document.getElementById('header').style.display = 'none';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
 function back() {
   document.getElementById('menu').style.display = 'grid';
-  document.getElementById('header').style.display = 'block';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 }
 
-// PRESENTE + VIBRAÇÃO
-function abrirPresente() {
+// VIBRAÇÃO FORÇADA (funciona melhor no celular após toque)
+function vibrar() {
   if (navigator.vibrate) {
-    navigator.vibrate(300);
+    navigator.vibrate(200);
   }
-
-  document.getElementById("mensagem-amor").style.display = "block";
 }
+
+// CARTA (abre/fecha)
+function toggleCarta() {
+  const carta = document.getElementById("conteudoCarta");
+
+  if (carta.style.display === "block") {
+    carta.style.display = "none";
+  } else {
+    carta.style.display = "block";
+    vibrar();
+  }
+}
+
+// PRESENTE
+function abrirPresente() {
+  document.getElementById("mensagem-amor").style.display = "block";
+  vibrar();
+}
+
+// HEARTS
+setInterval(() => {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+  heart.innerHTML = '❤️';
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
 </script>
 
 </body>
