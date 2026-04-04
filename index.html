@@ -66,13 +66,6 @@ header {
   border-radius: 20px;
   padding: 30px;
   cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-  font-weight: bold;
-}
-
-.card:hover {
-  transform: scale(1.1) rotate(1deg);
 }
 
 /* PAGES */
@@ -88,7 +81,6 @@ header {
   min-height: 100vh;
   text-align: center;
   min-width: 100vw;
-  scroll-snap-align: start;
 }
 
 .active { display: block; }
@@ -99,13 +91,11 @@ header {
   justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
-  margin-top: 20px;
 }
 
 .galeria img {
   width: 150px;
   height: 200px;
-  object-fit: cover;
   border-radius: 15px;
 }
 
@@ -117,7 +107,6 @@ header {
   padding: 20px;
   border-radius: 15px;
   margin-top: 20px;
-  animation: aparecer 0.5s ease;
 }
 
 /* PRESENTE */
@@ -159,7 +148,7 @@ header {
   <p>Prepare-se para uma surpresa...</p>
 </div>
 
-<header>Você é meu mundo 💖</header>
+<header id="headerPrincipal">Você é meu mundo 💖</header>
 
 <div id="menu" class="menu">
   <div class="card" onclick="showPage('rapunzel')">✨ Rapunzel</div>
@@ -210,9 +199,9 @@ header {
 
 <!-- CARTA -->
 <div id="carta" class="page carta">
-  <h1>💌 Clique para abrir a carta</h1>
+  <h1>💌 Clique no envelope</h1>
 
-  <div onclick="toggleCarta()" style="cursor:pointer;font-size:50px;">✉️</div>
+  <div onclick="toggleCarta()" style="font-size:60px;cursor:pointer;">✉️</div>
 
   <div id="conteudoCarta" class="carta-box">
     <p>
@@ -229,10 +218,13 @@ header {
 
 <!-- FINAL -->
 <div id="final" class="page final">
-  <h1>Você mudou minha vida 💙</h1>
+  <h1>Você mudou minha vida 💚</h1>
+  <p>Meu coração cresceu por sua causa...</p>
+  <h2>Quer continuar essa história comigo?</h2>
 
   <div class="presente" onclick="abrirPresente()">🎁</div>
   <div id="mensagem-amor">EU TE AMO ❤️</div>
+  <canvas id="confete"></canvas>
 
   <button onclick="back()">Voltar</button>
 </div>
@@ -242,23 +234,23 @@ header {
 <script>
 function showPage(id) {
   document.getElementById('menu').style.display = 'none';
+  document.getElementById('headerPrincipal').style.display = 'none';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
 function back() {
   document.getElementById('menu').style.display = 'grid';
+  document.getElementById('headerPrincipal').style.display = 'block';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 }
 
-// VIBRAÇÃO FORÇADA (funciona melhor no celular após toque)
 function vibrar() {
   if (navigator.vibrate) {
-    navigator.vibrate(200);
+    navigator.vibrate([200,100,200]);
   }
 }
 
-// CARTA (abre/fecha)
 function toggleCarta() {
   const carta = document.getElementById("conteudoCarta");
 
@@ -270,10 +262,20 @@ function toggleCarta() {
   }
 }
 
-// PRESENTE
 function abrirPresente() {
   document.getElementById("mensagem-amor").style.display = "block";
   vibrar();
+
+  const canvas = document.getElementById("confete");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  for (let i = 0; i < 200; i++) {
+    ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 50%)`;
+    ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 6, 6);
+  }
 }
 
 // HEARTS
@@ -284,7 +286,6 @@ setInterval(() => {
   heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
   heart.innerHTML = '❤️';
   document.body.appendChild(heart);
-
   setTimeout(() => heart.remove(), 5000);
 }, 300);
 </script>
