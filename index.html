@@ -74,7 +74,6 @@
       transform: scale(1.1) rotate(1deg);
     }
 
-    /* SWIPE */
     .container {
       display: flex;
       overflow-x: auto;
@@ -83,7 +82,7 @@
 
     .page {
       display: none;
-      padding: 40px;
+      padding: 0;
       min-height: 100vh;
       text-align: center;
       min-width: 100vw;
@@ -91,6 +90,16 @@
     }
 
     .active { display: block; }
+
+    .topo-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .conteudo {
+      padding: 30px;
+    }
 
     button {
       padding: 12px 25px;
@@ -101,7 +110,6 @@
       font-size: 1em;
     }
 
-    /* GALERIA */
     .galeria {
       display: flex;
       justify-content: center;
@@ -123,28 +131,43 @@
       transform: scale(1.05);
     }
 
-    /* PRESENTE */
     .presente {
       font-size: 60px;
       cursor: pointer;
       margin-top: 30px;
-      transition: 0.3s;
-    }
-
-    .presente:hover {
-      transform: scale(1.2);
     }
 
     #mensagem-amor {
       font-size: 50px;
       color: #ff004c;
       display: none;
-      animation: aparecer 1s ease;
     }
 
-    @keyframes aparecer {
-      from { opacity: 0; transform: scale(0.5); }
-      to { opacity: 1; transform: scale(1); }
+    /* CARTA */
+    #carta {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .envelope {
+      font-size: 80px;
+      cursor: pointer;
+    }
+
+    .carta-texto {
+      display: none;
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 300px;
+      text-align: center;
     }
 
     /* THEMES */
@@ -152,151 +175,136 @@
     .spiderman { background: linear-gradient(135deg, #ff416c, #000000); }
     .ralph { background: linear-gradient(135deg, #f7971e, #ffd200); }
     .peppa { background: linear-gradient(135deg, #ff9ec4, #ffc3a0); }
-    .grinch { background: linear-gradient(135deg, #56ab2f, #a8e063); }
+    .grinch { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
 
-    /* HEARTS */
-    .heart {
-      position: fixed;
-      top: -10px;
-      animation: fall linear infinite;
-      color: red;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-    }
   </style>
 </head>
 
 <body>
 
+<!-- CARTA -->
+<div id="carta">
+  <div class="envelope" onclick="abrirCarta()">💌</div>
+  <div class="carta-texto" id="textoCarta">
+    Você é minha Rapunzel ✨<br>
+    Minha heroína como o Homem-Aranha 🕷️<br>
+    Minha melhor fase como o Ralph 🎮<br>
+    E minha alegria como a Peppa 🐷❤️
+  </div>
+</div>
+
 <div id="intro">
-  <h1>Feliz Aniversário Meu Amor  ❤️<br>15 anos 🎉</h1>
+  <h1>Feliz Aniversário Meu Amor ❤️<br>15 anos 🎉</h1>
   <p>Prepare-se para uma surpresa...</p>
 </div>
 
-<header>Você é meu mundo 💖</header>
+<header id="header">Você é meu mundo 💖</header>
 
 <div id="menu" class="menu">
   <div class="card" onclick="showPage('rapunzel')">✨ Rapunzel</div>
   <div class="card" onclick="showPage('spiderman')">🕷️ Homem-Aranha</div>
   <div class="card" onclick="showPage('ralph')">🎮 Detona Ralph</div>
   <div class="card" onclick="showPage('peppa')">🐷 Peppa Pig</div>
-  <div class="card" onclick="showPage('grinch')">💚 Final</div>
+  <div class="card" onclick="showPage('grinch')">💙 Final</div>
 </div>
 
 <div class="container">
 
-<!-- RAPUNZEL -->
 <div id="rapunzel" class="page rapunzel">
+  <img class="topo-img" src="topo1.jpg">
+  <div class="conteudo">
   <h1>Você ilumina minha vida ✨</h1>
-  <p>Igual as lanternas da Rapunzel... você faz tudo brilhar.</p>
+  <p>Igual as lanternas da Rapunzel...</p>
   <div class="galeria">
     <img src="foto1.jpg">
     <img src="foto1b.jpg">
   </div>
-  <br><button onclick="back()">Voltar</button>
+  <button onclick="back()">Voltar</button>
+  </div>
 </div>
 
-<!-- SPIDERMAN -->
 <div id="spiderman" class="page spiderman">
+  <img class="topo-img" src="topo2.jpg">
+  <div class="conteudo">
   <h1>Minha heroína ❤️</h1>
-  <p>Com grandes poderes... vem um grande amor.</p>
   <div class="galeria">
     <img src="foto2.jpg">
     <img src="foto2b.jpg">
   </div>
-  <br><button onclick="back()">Voltar</button>
+  <button onclick="back()">Voltar</button>
+  </div>
 </div>
 
-<!-- RALPH -->
 <div id="ralph" class="page ralph">
+  <img class="topo-img" src="topo3.jpg">
+  <div class="conteudo">
   <h1>Você é minha melhor fase 🎮</h1>
-  <p>Mesmo nos momentos difíceis, você é meu prêmio final.</p>
   <div class="galeria">
     <img src="foto3.jpg">
     <img src="foto3b.jpg">
   </div>
-  <br><button onclick="back()">Voltar</button>
+  <button onclick="back()">Voltar</button>
+  </div>
 </div>
 
-<!-- PEPPA -->
 <div id="peppa" class="page peppa">
+  <img class="topo-img" src="topo4.jpg">
+  <div class="conteudo">
   <h1>Você é minha alegria 🐷💕</h1>
-  <p>Com você, tudo fica divertido e leve.</p>
   <div class="galeria">
     <img src="foto4.jpg">
     <img src="foto4b.jpg">
   </div>
-  <br><button onclick="back()">Voltar</button>
+  <button onclick="back()">Voltar</button>
+  </div>
 </div>
 
-<!-- FINAL -->
 <div id="grinch" class="page grinch">
-  <h1>Você mudou minha vida 💚</h1>
-  <p>Meu coração cresceu por sua causa...</p>
+  <img class="topo-img" src="topo5.jpg">
+  <div class="conteudo">
+  <h1>Você mudou minha vida 💙</h1>
   <h2>Quer continuar essa história comigo?</h2>
 
   <div class="presente" onclick="abrirPresente()">🎁</div>
   <div id="mensagem-amor">EU TE AMO ❤️</div>
-  <canvas id="confete"></canvas>
 
-  <br><button onclick="back()">Voltar</button>
+  <button onclick="back()">Voltar</button>
+  </div>
 </div>
 
 </div>
-
-<audio autoplay loop>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
 
 <script>
+function abrirCarta() {
+  document.querySelector(".envelope").style.display = "none";
+  document.getElementById("textoCarta").style.display = "block";
+
+  setTimeout(() => {
+    document.getElementById("carta").style.display = "none";
+  }, 4000);
+}
+
 function showPage(id) {
   document.getElementById('menu').style.display = 'none';
+  document.getElementById('header').style.display = 'none';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
 function back() {
   document.getElementById('menu').style.display = 'grid';
+  document.getElementById('header').style.display = 'block';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 }
 
-// PRESENTE
+// PRESENTE + VIBRAÇÃO
 function abrirPresente() {
-  document.getElementById("mensagem-amor").style.display = "block";
-
-  const canvas = document.getElementById("confete");
-  const ctx = canvas.getContext("2d");
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  for (let i = 0; i < 200; i++) {
-    ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 50%)`;
-    ctx.fillRect(
-      Math.random() * canvas.width,
-      Math.random() * canvas.height,
-      6,
-      6
-    );
+  if (navigator.vibrate) {
+    navigator.vibrate(300);
   }
+
+  document.getElementById("mensagem-amor").style.display = "block";
 }
-
-// HEART EFFECT
-setInterval(() => {
-  const heart = document.createElement('div');
-  heart.classList.add('heart');
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-  heart.innerHTML = '❤️';
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 5000);
-}, 300);
 </script>
 
 </body>
