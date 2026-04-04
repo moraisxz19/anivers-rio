@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maria Clara - 15 anos ❤️</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+      background: black;
+      color: white;
+    }
+
+    /* INTRO */
+    #intro {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: radial-gradient(circle, #ff4e50, #000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+      animation: fadeOut 3s ease forwards;
+      animation-delay: 4s;
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    #intro h1 {
+      font-size: 3em;
+      text-align: center;
+      animation: zoom 3s ease;
+    }
+
+    @keyframes zoom {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    header {
+      padding: 40px;
+      text-align: center;
+      font-size: 2.5em;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      color: black;
+      border-radius: 20px;
+      padding: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      font-weight: bold;
+    }
+
+    .card:hover {
+      transform: scale(1.1) rotate(1deg);
+    }
+
+    .page {
+      display: none;
+      padding: 40px;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .active { display: block; }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 1em;
+    }
+
+    img {
+      width: 220px;
+      border-radius: 20px;
+      margin-top: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    /* THEMES */
+    .rapunzel { background: linear-gradient(135deg, #fbc2eb, #a6c1ee); }
+    .spiderman { background: linear-gradient(135deg, #ff416c, #000000); }
+    .ralph { background: linear-gradient(135deg, #f7971e, #ffd200); }
+    .peppa { background: linear-gradient(135deg, #ff9ec4, #ffc3a0); }
+    .grinch { background: linear-gradient(135deg, #56ab2f, #a8e063); }
+
+    /* HEARTS */
+    .heart {
+      position: fixed;
+      top: -10px;
+      animation: fall linear infinite;
+      color: red;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <h1>Feliz Aniversário Maria Clara ❤️<br>15 anos 🎉</h1>
+  <p>Prepare-se para uma surpresa...</p>
+</div>
+
+<header>Você é meu mundo 💖</header>
+
+<div id="menu" class="menu">
+  <div class="card" onclick="showPage('rapunzel')">✨ Rapunzel</div>
+  <div class="card" onclick="showPage('spiderman')">🕷️ Homem-Aranha</div>
+  <div class="card" onclick="showPage('ralph')">🎮 Detona Ralph</div>
+  <div class="card" onclick="showPage('peppa')">🐷 Peppa Pig</div>
+  <div class="card" onclick="showPage('grinch')">💚 Final</div>
+</div>
+
+<!-- RAPUNZEL -->
+<div id="rapunzel" class="page rapunzel">
+  <h1>Você ilumina minha vida ✨</h1>
+  <p>Igual as lanternas da Rapunzel... você faz tudo brilhar.</p>
+  <img src="foto1.jpg">
+  <br><button onclick="back()">Voltar</button>
+</div>
+
+<!-- SPIDERMAN -->
+<div id="spiderman" class="page spiderman">
+  <h1>Minha heroína ❤️</h1>
+  <p>Com grandes poderes... vem um grande amor.</p>
+  <img src="foto2.jpg">
+  <br><button onclick="back()">Voltar</button>
+</div>
+
+<!-- RALPH -->
+<div id="ralph" class="page ralph">
+  <h1>Você é minha melhor fase 🎮</h1>
+  <p>Mesmo nos momentos difíceis, você é meu prêmio final.</p>
+  <img src="foto3.jpg">
+  <br><button onclick="back()">Voltar</button>
+</div>
+
+<!-- PEPPA -->
+<div id="peppa" class="page peppa">
+  <h1>Você é minha alegria 🐷💕</h1>
+  <p>Com você, tudo fica divertido e leve.</p>
+  <img src="foto4.jpg">
+  <br><button onclick="back()">Voltar</button>
+</div>
+
+<!-- FINAL -->
+<div id="grinch" class="page grinch">
+  <h1>Você mudou minha vida 💚</h1>
+  <p>Meu coração cresceu por sua causa...</p>
+  <h2>Quer continuar essa história comigo? 💍</h2>
+  <img src="foto5.jpg">
+  <br><button onclick="back()">Voltar</button>
+</div>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function showPage(id) {
+  document.getElementById('menu').style.display = 'none';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function back() {
+  document.getElementById('menu').style.display = 'grid';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+}
+
+// HEART EFFECT
+setInterval(() => {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+  heart.innerHTML = '❤️';
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
+</script>
+
+</body>
+</html>
