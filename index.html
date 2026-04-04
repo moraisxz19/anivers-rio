@@ -74,11 +74,20 @@
       transform: scale(1.1) rotate(1deg);
     }
 
+    /* SWIPE */
+    .container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+    }
+
     .page {
       display: none;
       padding: 40px;
       min-height: 100vh;
       text-align: center;
+      min-width: 100vw;
+      scroll-snap-align: start;
     }
 
     .active { display: block; }
@@ -92,11 +101,50 @@
       font-size: 1em;
     }
 
-    img {
-      width: 220px;
-      border-radius: 20px;
+    /* GALERIA */
+    .galeria {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
       margin-top: 20px;
+    }
+
+    .galeria img {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: 0.3s;
       box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+
+    /* PRESENTE */
+    .presente {
+      font-size: 60px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: 0.3s;
+    }
+
+    .presente:hover {
+      transform: scale(1.2);
+    }
+
+    #mensagem-amor {
+      font-size: 50px;
+      color: #ff004c;
+      display: none;
+      animation: aparecer 1s ease;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     /* THEMES */
@@ -120,14 +168,13 @@
         opacity: 0;
       }
     }
-
   </style>
 </head>
+
 <body>
 
-<!-- INTRO -->
 <div id="intro">
-  <h1>Feliz Aniversário Maria Clara ❤️<br>15 anos 🎉</h1>
+  <h1>Feliz Aniversário Meu Amor  ❤️<br>15 anos 🎉</h1>
   <p>Prepare-se para uma surpresa...</p>
 </div>
 
@@ -141,11 +188,16 @@
   <div class="card" onclick="showPage('grinch')">💚 Final</div>
 </div>
 
+<div class="container">
+
 <!-- RAPUNZEL -->
 <div id="rapunzel" class="page rapunzel">
   <h1>Você ilumina minha vida ✨</h1>
   <p>Igual as lanternas da Rapunzel... você faz tudo brilhar.</p>
-  <img src="foto1.jpg">
+  <div class="galeria">
+    <img src="foto1.jpg">
+    <img src="foto1b.jpg">
+  </div>
   <br><button onclick="back()">Voltar</button>
 </div>
 
@@ -153,7 +205,10 @@
 <div id="spiderman" class="page spiderman">
   <h1>Minha heroína ❤️</h1>
   <p>Com grandes poderes... vem um grande amor.</p>
-  <img src="foto2.jpg">
+  <div class="galeria">
+    <img src="foto2.jpg">
+    <img src="foto2b.jpg">
+  </div>
   <br><button onclick="back()">Voltar</button>
 </div>
 
@@ -161,7 +216,10 @@
 <div id="ralph" class="page ralph">
   <h1>Você é minha melhor fase 🎮</h1>
   <p>Mesmo nos momentos difíceis, você é meu prêmio final.</p>
-  <img src="foto3.jpg">
+  <div class="galeria">
+    <img src="foto3.jpg">
+    <img src="foto3b.jpg">
+  </div>
   <br><button onclick="back()">Voltar</button>
 </div>
 
@@ -169,7 +227,10 @@
 <div id="peppa" class="page peppa">
   <h1>Você é minha alegria 🐷💕</h1>
   <p>Com você, tudo fica divertido e leve.</p>
-  <img src="foto4.jpg">
+  <div class="galeria">
+    <img src="foto4.jpg">
+    <img src="foto4b.jpg">
+  </div>
   <br><button onclick="back()">Voltar</button>
 </div>
 
@@ -178,11 +239,16 @@
   <h1>Você mudou minha vida 💚</h1>
   <p>Meu coração cresceu por sua causa...</p>
   <h2>Quer continuar essa história comigo? 💍</h2>
-  <img src="foto5.jpg">
+
+  <div class="presente" onclick="abrirPresente()">🎁</div>
+  <div id="mensagem-amor">EU TE AMO ❤️</div>
+  <canvas id="confete"></canvas>
+
   <br><button onclick="back()">Voltar</button>
 </div>
 
-<!-- MUSIC -->
+</div>
+
 <audio autoplay loop>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
@@ -197,6 +263,27 @@ function showPage(id) {
 function back() {
   document.getElementById('menu').style.display = 'grid';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+}
+
+// PRESENTE
+function abrirPresente() {
+  document.getElementById("mensagem-amor").style.display = "block";
+
+  const canvas = document.getElementById("confete");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  for (let i = 0; i < 200; i++) {
+    ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 50%)`;
+    ctx.fillRect(
+      Math.random() * canvas.width,
+      Math.random() * canvas.height,
+      6,
+      6
+    );
+  }
 }
 
 // HEART EFFECT
