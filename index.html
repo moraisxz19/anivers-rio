@@ -3,225 +3,341 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maria Clara ❤️</title>
+<title>Maria Clara - 15 anos ❤️</title>
 
 <style>
-body { margin:0; font-family:sans-serif; background:black; color:white; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  background: black;
+  color: white;
+}
 
-/* HEADER */
+/* INTRO */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(circle, #ff4e50, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+  animation: fadeOut 3s ease forwards;
+  animation-delay: 4s;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+#intro h1 {
+  font-size: 3em;
+  text-align: center;
+  animation: zoom 3s ease;
+}
+
+@keyframes zoom {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 header {
-  padding:40px;
-  text-align:center;
-  font-size:2em;
-  background:pink;
+  padding: 40px;
+  text-align: center;
+  font-size: 2.5em;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
 }
 
 /* MENU */
-.menu { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; padding:20px; }
-.card { background:white; color:black; padding:20px; border-radius:10px; text-align:center; }
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  color: black;
+  border-radius: 20px;
+  padding: 30px;
+  cursor: pointer;
+}
 
 /* PAGES */
-.page { display:none; min-height:100vh; padding:20px; text-align:center; position:relative; overflow:hidden; }
-.active { display:block; }
+.container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.page {
+  display: none;
+  padding: 40px;
+  min-height: 100vh;
+  text-align: center;
+  min-width: 100vw;
+}
+
+.active { display: block; }
 
 /* GALERIA */
-.galeria img { width:120px; border-radius:10px; }
+.galeria {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.galeria img {
+  width: 150px;
+  height: 200px;
+  border-radius: 15px;
+}
 
 /* CARTA */
-.carta-box { display:none; background:white; color:black; padding:10px; border-radius:10px; }
+.carta-box {
+  display: none;
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
 
-/* HEART CORRIGIDO */
+/* PRESENTE */
+.presente {
+  font-size: 60px;
+  cursor: pointer;
+}
+
+#mensagem-amor {
+  font-size: 50px;
+  color: #ff004c;
+  display: none;
+}
+
+/* THEMES */
+.rapunzel { 
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  position: relative;
+  overflow: hidden;
+}
+.spiderman { background: linear-gradient(135deg, #ff416c, #000000); }
+.ralph { background: linear-gradient(135deg, #f7971e, #ffd200); }
+.peppa { background: linear-gradient(135deg, #ff9ec4, #ffc3a0); }
+.carta { background: linear-gradient(135deg, #fff1eb, #ace0f9); }
+.final { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
+
+/* LANTERNAS */
+.lanterna {
+  position: absolute;
+  bottom: -50px;
+  width: 20px;
+  height: 30px;
+  background: radial-gradient(circle, #ffd700, #ffae00);
+  border-radius: 5px;
+  opacity: 0.8;
+  animation: subirLanterna linear forwards;
+}
+
+@keyframes subirLanterna {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+/* HEART */
 .heart {
   position: fixed;
-  top: -20px;
-  font-size: 20px;
-  animation: cair linear forwards;
+  top: -10px;
+  animation: fall linear infinite;
 }
-@keyframes cair {
-  0% { transform: translateY(0); opacity:1; }
-  100% { transform: translateY(110vh); opacity:0; }
+@keyframes fall {
+  to { transform: translateY(100vh); opacity: 0; }
 }
-
-/* RAPUNZEL (NÃO MUDEI FUNDO) */
-.lanterna {
-  position:absolute;
-  bottom:-50px;
-  width:20px;
-  height:30px;
-  background:radial-gradient(circle,#ffd700,#ffae00);
-  border-radius:5px;
-  box-shadow:0 0 20px #ffd700;
-  animation:subir linear forwards;
-}
-@keyframes subir {
-  to { transform:translateY(-110vh); opacity:0; }
-}
-
-/* HOMEM ARANHA */
-.cidade {
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:220px;
-  background:repeating-linear-gradient(to right,#111 0,#111 30px,#000 30px,#000 60px);
-}
-
-.spider-real {
-  position:absolute;
-  top:0;
-  left:20px;
-  font-size:45px;
-  transform-origin:top;
-  animation:balanco 2s infinite;
-}
-@keyframes balanco {
-  0%{transform:rotate(15deg);}
-  50%{transform:rotate(-15deg);}
-  100%{transform:rotate(15deg);}
-}
-
-/* TEIA COMPLETA */
-.teia {
-  position:absolute;
-  width:120px;
-  height:120px;
-  border:2px solid white;
-  border-radius:50%;
-  animation:abrir 0.2s ease;
-}
-@keyframes abrir {
-  from { transform:scale(0); opacity:0; }
-  to { transform:scale(1); opacity:1; }
-}
-.teia::before,
-.teia::after {
-  content:"";
-  position:absolute;
-  background:white;
-}
-.teia::before { width:2px; height:100%; left:50%; }
-.teia::after { height:2px; width:100%; top:50%; }
-
 </style>
 </head>
 
 <body>
+
+<div id="intro">
+  <h1>Feliz Aniversário Meu Amor ❤️<br>15 anos 🎉</h1>
+  <p>Prepare-se para uma surpresa...</p>
+</div>
 
 <header id="headerPrincipal">Você é meu mundo 💖</header>
 
 <div id="menu" class="menu">
   <div class="card" onclick="showPage('rapunzel')">✨ Rapunzel</div>
   <div class="card" onclick="showPage('spiderman')">🕷️ Homem-Aranha</div>
+  <div class="card" onclick="showPage('ralph')">🎮 Detona Ralph</div>
+  <div class="card" onclick="showPage('peppa')">🐷 Peppa Pig</div>
   <div class="card" onclick="showPage('carta')">💌 Carta</div>
+  <div class="card" onclick="showPage('final')">💙 Final</div>
 </div>
 
+<div class="container">
+
 <!-- RAPUNZEL -->
-<div id="rapunzel" class="page" onclick="criarLanterna()">
+<div id="rapunzel" class="page rapunzel" onclick="criarLanterna()">
   <h1>Você ilumina minha vida ✨</h1>
+  <p>Igual as lanternas da Rapunzel... você faz tudo brilhar.</p>
+
   <div class="galeria">
-    <img src="foto1.jpg"><img src="foto1b.jpg">
+    <img src="foto1.jpg">
+    <img src="foto1b.jpg">
   </div>
+
   <button onclick="back()">Voltar</button>
 </div>
 
 <!-- SPIDERMAN -->
-<div id="spiderman" class="page" onclick="soltarTeia(event)">
-  <div class="spider-real">🕷️</div>
-  <div class="cidade"></div>
-
+<div id="spiderman" class="page spiderman">
   <h1>Minha heroína ❤️</h1>
   <div class="galeria">
     <img src="foto2.jpg"><img src="foto2b.jpg">
+  </div>
+  <button onclick="back()">Voltar</button>
+</div>
+
+<!-- RALPH -->
+<div id="ralph" class="page ralph">
+  <h1>Você é minha melhor fase 🎮</h1>
+  <div class="galeria">
+    <img src="foto3.jpg"><img src="foto3b.jpg">
+  </div>
+  <button onclick="back()">Voltar</button>
+</div>
+
+<!-- PEPPA -->
+<div id="peppa" class="page peppa">
+  <h1>Você é minha alegria 🐷💕</h1>
+  <div class="galeria">
+    <img src="foto4.jpg"><img src="foto4b.jpg">
+  </div>
+  <button onclick="back()">Voltar</button>
+</div>
+
+<!-- CARTA -->
+<div id="carta" class="page carta">
+  <h1>💌 Clique no envelope</h1>
+
+  <div onclick="toggleCarta()" style="font-size:60px;cursor:pointer;">✉️</div>
+
+  <div id="conteudoCarta" class="carta-box">
+    <p>
+      Você é minha Rapunzel ✨<br>
+      Minha heroína como o Homem-Aranha 🕷️<br>
+      Minha melhor fase como Detona Ralph 🎮<br>
+      E minha alegria como a Peppa 🐷<br><br>
+      Eu te amo muito ❤️
+    </p>
   </div>
 
   <button onclick="back()">Voltar</button>
 </div>
 
-<!-- CARTA -->
-<div id="carta" class="page">
-  <h1>💌</h1>
-  <div onclick="toggleCarta()">Abrir</div>
-  <div id="conteudoCarta" class="carta-box">Eu te amo ❤️</div>
+<!-- FINAL -->
+<div id="final" class="page final">
+  <h1>Você mudou minha vida 💚</h1>
+  <p>Meu coração cresceu por sua causa...</p>
+  <h2>Quer continuar essa história comigo?</h2>
+
+  <div class="presente" onclick="abrirPresente()">🎁</div>
+  <div id="mensagem-amor">EU TE AMO ❤️</div>
+  <canvas id="confete"></canvas>
+
   <button onclick="back()">Voltar</button>
 </div>
 
+</div>
+
 <script>
-let paginaAtual="menu";
-
-function showPage(id){
-  paginaAtual=id;
-  document.getElementById("menu").style.display="none";
-  document.getElementById("headerPrincipal").style.display="none";
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+function showPage(id) {
+  document.getElementById('menu').style.display = 'none';
+  document.getElementById('headerPrincipal').style.display = 'none';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
-function back(){
-  paginaAtual="menu";
-  document.getElementById("menu").style.display="grid";
-  document.getElementById("headerPrincipal").style.display="block";
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+function back() {
+  document.getElementById('menu').style.display = 'grid';
+  document.getElementById('headerPrincipal').style.display = 'block';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 }
 
-function vibrar(){
-  if(navigator.vibrate) navigator.vibrate(200);
-}
-
-/* CARTA */
-function toggleCarta(){
-  const c=document.getElementById("conteudoCarta");
-  c.style.display=c.style.display==="block"?"none":"block";
-  vibrar();
-}
-
-/* LANTERNAS */
-function criarLanterna(){
-  const page=document.getElementById("rapunzel");
-
-  for(let i=0;i<4;i++){
-    const l=document.createElement("div");
-    l.className="lanterna";
-    l.style.left=Math.random()*100+"vw";
-    l.style.animationDuration=(Math.random()*3+4)+"s";
-    page.appendChild(l);
-    setTimeout(()=>l.remove(),7000);
+function vibrar() {
+  if (navigator.vibrate) {
+    navigator.vibrate([200,100,200]);
   }
 }
 
-setInterval(()=>{
-  if(paginaAtual==="rapunzel"){
+function toggleCarta() {
+  const carta = document.getElementById("conteudoCarta");
+
+  if (carta.style.display === "block") {
+    carta.style.display = "none";
+  } else {
+    carta.style.display = "block";
+    vibrar();
+  }
+}
+
+function abrirPresente() {
+  document.getElementById("mensagem-amor").style.display = "block";
+  vibrar();
+
+  const canvas = document.getElementById("confete");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  for (let i = 0; i < 200; i++) {
+    ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 50%)`;
+    ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 6, 6);
+  }
+}
+
+// LANTERNAS
+function criarLanterna() {
+  const page = document.getElementById("rapunzel");
+
+  for (let i = 0; i < 5; i++) {
+    const lanterna = document.createElement("div");
+    lanterna.classList.add("lanterna");
+
+    lanterna.style.left = Math.random() * 100 + "vw";
+    lanterna.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+    page.appendChild(lanterna);
+
+    setTimeout(() => lanterna.remove(), 7000);
+  }
+}
+
+setInterval(() => {
+  if (document.getElementById("rapunzel").classList.contains("active")) {
     criarLanterna();
   }
-},1200);
+}, 1200);
 
-/* TEIA */
-function soltarTeia(e){
-  const t=document.createElement("div");
-  t.className="teia";
-
-  t.style.left=(e.clientX-60)+"px";
-  t.style.top=(e.clientY-60)+"px";
-
-  document.getElementById("spiderman").appendChild(t);
-
-  vibrar();
-
-  setTimeout(()=>t.remove(),1200);
-}
-
-/* CORAÇÕES CORRETOS */
-setInterval(()=>{
-  if(paginaAtual==="menu" || paginaAtual==="carta"){
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=(Math.random()*3+2)+"s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),5000);
-  }
-},300);
-
+// HEARTS
+setInterval(() => {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+  heart.innerHTML = '❤️';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
 </script>
 
 </body>
