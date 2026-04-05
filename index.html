@@ -123,7 +123,7 @@ header {
 
 /* THEMES */
 .rapunzel { 
-  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  background: linear-gradient(to top, #0f2027, #203a43, #2c5364);
   position: relative;
   overflow: hidden;
 }
@@ -133,7 +133,7 @@ header {
 .carta { background: linear-gradient(135deg, #fff1eb, #ace0f9); }
 .final { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
 
-/* LANTERNAS */
+/* LANTERNAS COM BRILHO */
 .lanterna {
   position: absolute;
   bottom: -50px;
@@ -141,7 +141,8 @@ header {
   height: 30px;
   background: radial-gradient(circle, #ffd700, #ffae00);
   border-radius: 5px;
-  opacity: 0.8;
+  opacity: 0.9;
+  box-shadow: 0 0 20px #ffd700, 0 0 40px #ffae00;
   animation: subirLanterna linear forwards;
 }
 
@@ -259,7 +260,10 @@ header {
 </div>
 
 <script>
+let paginaAtual = "menu";
+
 function showPage(id) {
+  paginaAtual = id;
   document.getElementById('menu').style.display = 'none';
   document.getElementById('headerPrincipal').style.display = 'none';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -267,6 +271,7 @@ function showPage(id) {
 }
 
 function back() {
+  paginaAtual = "menu";
   document.getElementById('menu').style.display = 'grid';
   document.getElementById('headerPrincipal').style.display = 'block';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -323,20 +328,22 @@ function criarLanterna() {
 }
 
 setInterval(() => {
-  if (document.getElementById("rapunzel").classList.contains("active")) {
+  if (paginaAtual === "rapunzel") {
     criarLanterna();
   }
 }, 1200);
 
-// HEARTS
+// HEARTS SOMENTE MENU E CARTA
 setInterval(() => {
-  const heart = document.createElement('div');
-  heart.classList.add('heart');
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-  heart.innerHTML = '❤️';
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 5000);
+  if (paginaAtual === "menu" || paginaAtual === "carta") {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    heart.innerHTML = '❤️';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
 }, 300);
 </script>
 
