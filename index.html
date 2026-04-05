@@ -29,17 +29,13 @@ body {
   animation: fadeOut 3s ease forwards;
   animation-delay: 4s;
 }
-
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
+@keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
 #intro h1 {
   font-size: 3em;
   text-align: center;
   animation: zoom 3s ease;
 }
-
 @keyframes zoom {
   from { transform: scale(0.5); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
@@ -82,7 +78,6 @@ header {
   text-align: center;
   min-width: 100vw;
 }
-
 .active { display: block; }
 
 /* GALERIA */
@@ -92,7 +87,6 @@ header {
   gap: 15px;
   flex-wrap: wrap;
 }
-
 .galeria img {
   width: 150px;
   height: 200px;
@@ -110,11 +104,7 @@ header {
 }
 
 /* PRESENTE */
-.presente {
-  font-size: 60px;
-  cursor: pointer;
-}
-
+.presente { font-size: 60px; cursor: pointer; }
 #mensagem-amor {
   font-size: 50px;
   color: #ff004c;
@@ -127,13 +117,17 @@ header {
   position: relative;
   overflow: hidden;
 }
-.spiderman { background: linear-gradient(135deg, #ff416c, #000000); }
+.spiderman {
+  background: linear-gradient(to top, #000000, #1a1a1a);
+  position: relative;
+  overflow: hidden;
+}
 .ralph { background: linear-gradient(135deg, #f7971e, #ffd200); }
 .peppa { background: linear-gradient(135deg, #ff9ec4, #ffc3a0); }
 .carta { background: linear-gradient(135deg, #fff1eb, #ace0f9); }
 .final { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
 
-/* LANTERNAS COM BRILHO */
+/* LANTERNAS */
 .lanterna {
   position: absolute;
   bottom: -50px;
@@ -145,12 +139,42 @@ header {
   box-shadow: 0 0 20px #ffd700, 0 0 40px #ffae00;
   animation: subirLanterna linear forwards;
 }
-
 @keyframes subirLanterna {
-  to {
-    transform: translateY(-110vh);
-    opacity: 0;
-  }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* SPIDERMAN */
+.predios {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, #000, transparent);
+}
+.teia {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 120px;
+  background: white;
+  animation: cairTeia 0.4s ease-out;
+}
+@keyframes cairTeia {
+  from { height: 0; opacity: 0; }
+  to { height: 120px; opacity: 1; }
+}
+.spider-topo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 35px;
+  transform-origin: top;
+  animation: balancoSpider 3s ease-in-out infinite;
+}
+@keyframes balancoSpider {
+  0% { transform: rotate(10deg); }
+  50% { transform: rotate(-10deg); }
+  100% { transform: rotate(10deg); }
 }
 
 /* HEART */
@@ -185,21 +209,17 @@ header {
 
 <div class="container">
 
-<!-- RAPUNZEL -->
 <div id="rapunzel" class="page rapunzel" onclick="criarLanterna()">
   <h1>Você ilumina minha vida ✨</h1>
-  <p>Igual as lanternas da Rapunzel... você faz tudo brilhar.</p>
-
   <div class="galeria">
-    <img src="foto1.jpg">
-    <img src="foto1b.jpg">
+    <img src="foto1.jpg"><img src="foto1b.jpg">
   </div>
-
   <button onclick="back()">Voltar</button>
 </div>
 
-<!-- SPIDERMAN -->
-<div id="spiderman" class="page spiderman">
+<div id="spiderman" class="page spiderman" onclick="soltarTeia(event)">
+  <div class="spider-topo">🕷️</div>
+  <div class="predios"></div>
   <h1>Minha heroína ❤️</h1>
   <div class="galeria">
     <img src="foto2.jpg"><img src="foto2b.jpg">
@@ -207,7 +227,6 @@ header {
   <button onclick="back()">Voltar</button>
 </div>
 
-<!-- RALPH -->
 <div id="ralph" class="page ralph">
   <h1>Você é minha melhor fase 🎮</h1>
   <div class="galeria">
@@ -216,7 +235,6 @@ header {
   <button onclick="back()">Voltar</button>
 </div>
 
-<!-- PEPPA -->
 <div id="peppa" class="page peppa">
   <h1>Você é minha alegria 🐷💕</h1>
   <div class="galeria">
@@ -225,35 +243,20 @@ header {
   <button onclick="back()">Voltar</button>
 </div>
 
-<!-- CARTA -->
 <div id="carta" class="page carta">
   <h1>💌 Clique no envelope</h1>
-
   <div onclick="toggleCarta()" style="font-size:60px;cursor:pointer;">✉️</div>
-
   <div id="conteudoCarta" class="carta-box">
-    <p>
-      Você é minha Rapunzel ✨<br>
-      Minha heroína como o Homem-Aranha 🕷️<br>
-      Minha melhor fase como Detona Ralph 🎮<br>
-      E minha alegria como a Peppa 🐷<br><br>
-      Eu te amo muito ❤️
-    </p>
+    <p>Você é minha Rapunzel ✨<br>Minha heroína 🕷️<br>Minha melhor fase 🎮<br>Minha alegria 🐷<br><br>Eu te amo ❤️</p>
   </div>
-
   <button onclick="back()">Voltar</button>
 </div>
 
-<!-- FINAL -->
 <div id="final" class="page final">
   <h1>Você mudou minha vida 💚</h1>
-  <p>Meu coração cresceu por sua causa...</p>
-  <h2>Quer continuar essa história comigo?</h2>
-
   <div class="presente" onclick="abrirPresente()">🎁</div>
   <div id="mensagem-amor">EU TE AMO ❤️</div>
   <canvas id="confete"></canvas>
-
   <button onclick="back()">Voltar</button>
 </div>
 
@@ -278,73 +281,50 @@ function back() {
 }
 
 function vibrar() {
-  if (navigator.vibrate) {
-    navigator.vibrate([200,100,200]);
-  }
+  if (navigator.vibrate) navigator.vibrate([200,100,200]);
 }
 
 function toggleCarta() {
   const carta = document.getElementById("conteudoCarta");
-
-  if (carta.style.display === "block") {
-    carta.style.display = "none";
-  } else {
-    carta.style.display = "block";
-    vibrar();
-  }
+  carta.style.display = carta.style.display === "block" ? "none" : "block";
+  vibrar();
 }
 
 function abrirPresente() {
   document.getElementById("mensagem-amor").style.display = "block";
   vibrar();
-
-  const canvas = document.getElementById("confete");
-  const ctx = canvas.getContext("2d");
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  for (let i = 0; i < 200; i++) {
-    ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 50%)`;
-    ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 6, 6);
-  }
 }
 
-// LANTERNAS
 function criarLanterna() {
   const page = document.getElementById("rapunzel");
-
-  for (let i = 0; i < 5; i++) {
-    const lanterna = document.createElement("div");
-    lanterna.classList.add("lanterna");
-
-    lanterna.style.left = Math.random() * 100 + "vw";
-    lanterna.style.animationDuration = (Math.random() * 3 + 4) + "s";
-
-    page.appendChild(lanterna);
-
-    setTimeout(() => lanterna.remove(), 7000);
-  }
+  const lanterna = document.createElement("div");
+  lanterna.classList.add("lanterna");
+  lanterna.style.left = Math.random()*100+"vw";
+  lanterna.style.animationDuration = "5s";
+  page.appendChild(lanterna);
+  setTimeout(()=>lanterna.remove(),5000);
 }
 
-setInterval(() => {
-  if (paginaAtual === "rapunzel") {
-    criarLanterna();
-  }
-}, 1200);
+function soltarTeia(event) {
+  const teia = document.createElement("div");
+  teia.classList.add("teia");
+  teia.style.left = event.clientX + "px";
+  document.getElementById("spiderman").appendChild(teia);
+  vibrar();
+  setTimeout(()=>teia.remove(),500);
+}
 
-// HEARTS SOMENTE MENU E CARTA
+/* HEARTS */
 setInterval(() => {
   if (paginaAtual === "menu" || paginaAtual === "carta") {
     const heart = document.createElement('div');
     heart.classList.add('heart');
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    heart.style.left = Math.random()*100+'vw';
     heart.innerHTML = '❤️';
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
+    setTimeout(()=>heart.remove(),5000);
   }
-}, 300);
+}, 400);
 </script>
 
 </body>
