@@ -162,6 +162,11 @@ header {
 @keyframes fall {
   to { transform: translateY(100vh); opacity: 0; }
 }
+  .spiderman {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to top, #000000, #1a1a1a);
+}
 </style>
 </head>
 
@@ -199,11 +204,22 @@ header {
 </div>
 
 <!-- SPIDERMAN -->
-<div id="spiderman" class="page spiderman">
+<!-- SPIDERMAN -->
+<div id="spiderman" class="page spiderman" onclick="criarTeia(event)">
+
+  <div class="cidade"></div>
+
+  <img src="https://i.imgur.com/XqQX1Qp.png" id="aranha">
+
   <h1>Minha heroína ❤️</h1>
+
   <div class="galeria">
-    <img src="foto2.jpg"><img src="foto2b.jpg">
+    <img src="foto2.jpg">
+    <img src="foto2b.jpg">
   </div>
+
+  <div id="pedidoBeijo">Posso roubar um beijo seu? 🥺❤️</div>
+
   <button onclick="back()">Voltar</button>
 </div>
 
@@ -345,6 +361,39 @@ setInterval(() => {
     setTimeout(() => heart.remove(), 5000);
   }
 }, 300);
+  document.addEventListener("click", function(e){
+  if(e.target.id === "aranha"){
+    const aranha = document.getElementById("aranha");
+    const texto = document.getElementById("pedidoBeijo");
+
+    aranha.classList.add("descer");
+
+    setTimeout(() => {
+      texto.style.display = "block";
+    }, 600);
+  }
+});
+
+function criarTeia(e) {
+  if (e.target.id === "aranha") return;
+
+  const teia = document.createElement("div");
+
+  teia.style.position = "absolute";
+  teia.style.left = e.clientX + "px";
+  teia.style.top = e.clientY + "px";
+  teia.style.width = "20px";
+  teia.style.height = "20px";
+  teia.style.border = "2px solid white";
+  teia.style.borderRadius = "50%";
+  teia.style.transform = "translate(-50%, -50%)";
+  teia.style.opacity = "0.8";
+  teia.style.zIndex = "2";
+
+  document.getElementById("spiderman").appendChild(teia);
+
+  setTimeout(() => teia.remove(), 1000);
+}
 </script>
 
 </body>
