@@ -129,7 +129,51 @@ header {
 }
 .spiderman { background: linear-gradient(135deg, #ff416c, #000000); }
 .ralph { background: linear-gradient(135deg, #f7971e, #ffd200); }
+  .moeda {
+  position: fixed;
+  top: -20px;
+  font-size: 24px;
+  animation: cair 3s linear infinite;
+}
+
+@keyframes cair {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.glitch {
+  animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(1px, -1px); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, 1px); }
+  75% { transform: translate(-1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
 .peppa { background: linear-gradient(135deg, #ff9ec4, #ffc3a0); }
+  .lama {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  background: brown;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+}
+
+.pulo-lama {
+  display: inline-block;
+  animation: pular 0.5s infinite alternate;
+}
+
+@keyframes pular {
+  from { transform: translateY(0); }
+  to { transform: translateY(-20px); }
+}
 .carta { background: linear-gradient(135deg, #fff1eb, #ace0f9); }
 .final { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
 
@@ -209,20 +253,36 @@ header {
 
 <!-- RALPH -->
 <div id="ralph" class="page ralph">
-  <h1>Você é minha melhor fase 🎮</h1>
+  <h1 class="glitch">🎮 PLAYER 1: VOCÊ</h1>
+  <p>Missão: te fazer feliz todos os dias ❤️</p>
+  <p>Status: completamente apaixonado 💖</p>
+  <p>Você é minha melhor fase 🎮</p>
+
   <div class="galeria">
     <img src="foto3.jpg"><img src="foto3b.jpg">
   </div>
+
+  <button onclick="alert('❤️ Você desbloqueou meu coração ❤️')">
+    🎮 CONTINUE
+  </button>
+
+  <br><br>
   <button onclick="back()">Voltar</button>
 </div>
-
 <!-- PEPPA -->
 <div id="peppa" class="page peppa">
-  <h1>Você é minha alegria 🐷💕</h1>
-  <div class="galeria">
-    <img src="foto4.jpg"><img src="foto4b.jpg">
-  </div>
-  <button onclick="back()">Voltar</button>
+  <h1 class="pulo-lama">🐷 Pulando na vida com você</h1>
+
+<p class="pulo-lama">Com você tudo fica divertido 💕</p>
+<p class="pulo-lama">Até os dias bagunçados viram felicidade 😂</p>
+
+<div class="galeria">
+  <img src="foto4.jpg"><img src="foto4b.jpg">
+</div>
+
+<div class="lama"></div>
+
+<button onclick="back()">Voltar</button>
 </div>
 
 <!-- CARTA -->
@@ -345,6 +405,32 @@ setInterval(() => {
     setTimeout(() => heart.remove(), 5000);
   }
 }, 300);
+  setInterval(() => {
+  if (paginaAtual === "ralph") {
+    const moeda = document.createElement("div");
+    moeda.classList.add("moeda");
+    moeda.innerHTML = "🪙";
+    moeda.style.left = Math.random() * 100 + "vw";
+
+    document.body.appendChild(moeda);
+
+    setTimeout(() => moeda.remove(), 3000);
+  }
+}, 400);
+  document.addEventListener("click", () => {
+  if (paginaAtual === "peppa") {
+    const splash = document.createElement("div");
+   splash.innerHTML = "🟤";
+    splash.style.position = "fixed";
+    splash.style.left = Math.random() * 100 + "vw";
+    splash.style.top = Math.random() * 100 + "vh";
+    splash.style.fontSize = "30px";
+
+    document.body.appendChild(splash);
+
+    setTimeout(() => splash.remove(), 500);
+  }
+});
 </script>
 
 </body>
