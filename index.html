@@ -166,8 +166,11 @@ header {
 
 .resposta {
   opacity: 0;
-  animation: aparecer 3s forwards;
-  animation-delay: 2s;
+  transition: opacity 1.5s;
+}
+
+.mostrar {
+  opacity: 1;
 }
 
 @keyframes aparecer {
@@ -482,6 +485,13 @@ setInterval(() => {
     document.body.appendChild(splash);
 
     setTimeout(() => splash.remove(), 500);
+  }
+});
+  // CLIQUE PARA MOSTRAR FRASE FINAL (SPIDERMAN)
+document.addEventListener("click", () => {
+  if (paginaAtual === "spiderman") {
+    const frase = document.getElementById("fraseFinal");
+    frase.classList.add("mostrar");
   }
 });
 </script>
