@@ -128,6 +128,51 @@ header {
   overflow: hidden;
 }
 .spiderman { background: linear-gradient(135deg, #ff416c, #000000); }
+  .teia-texto {
+  display: inline-block;
+  transform: rotate(180deg);
+  position: relative;
+  margin-top: 40px;
+  animation: descer 2s ease-out, balancar 2s infinite ease-in-out;
+}
+
+.teia-texto::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  width: 2px;
+  height: 40px;
+  background: white;
+  transform: translateX(-50%);
+}
+
+@keyframes descer {
+  from {
+    transform: translateY(-200px) rotate(180deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+@keyframes balancar {
+  0% { transform: rotate(180deg) rotate(-5deg); }
+  50% { transform: rotate(180deg) rotate(5deg); }
+  100% { transform: rotate(180deg) rotate(-5deg); }
+}
+
+.resposta {
+  opacity: 0;
+  animation: aparecer 3s forwards;
+  animation-delay: 2s;
+}
+
+@keyframes aparecer {
+  to { opacity: 1; }
+}
 .ralph { background: linear-gradient(135deg, #f7971e, #ffd200); }
   .moeda {
   position: fixed;
@@ -244,12 +289,20 @@ header {
 
 <!-- SPIDERMAN -->
 <div id="spiderman" class="page spiderman">
-  <h1>Minha heroína ❤️</h1>
-  <div class="galeria">
-    <img src="foto2.jpg"><img src="foto2b.jpg">
-  </div>
-  <button onclick="back()">Voltar</button>
+<h1 class="teia-texto">Mesmo quando o mundo estiver de ponta cabeça...</h1>
+
+<p class="resposta">Eu vou estar com você ❤️</p>
+
+<br>
+
+<div class="galeria">
+  <img src="foto2.jpg"><img src="foto2b.jpg">
 </div>
+
+<br>
+
+<button onclick="back()">Voltar</button>
+  </div>
 
 <!-- RALPH -->
 <div id="ralph" class="page ralph">
