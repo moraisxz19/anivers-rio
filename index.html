@@ -385,14 +385,22 @@ No fim, não tem frase perfeita pra explicar, só sei que com você, até o simp
 <!-- FINAL -->
 <div id="final" class="page final">
   <h1>Você mudou minha vida 💙</h1>
-  <p>Meu coração cresceu por sua causa...</p>
-  <h2>Quer continuar essa história comigo?</h2>
+<p>Meu coração cresceu por sua causa...</p>
+<h2>Quer continuar essa história comigo?</h2>
 
-  <div class="presente" onclick="abrirPresente()">🎁</div>
-  <div id="mensagem-amor">EU TE AMO ❤️</div>
-  <canvas id="confete"></canvas>
+<div class="presente" onclick="mostrarEscolha()">🎁</div>
 
-  <button onclick="back()">Voltar</button>
+<!-- BOTÕES -->
+<div id="escolha" style="display:none; margin-top:20px;">
+  <button onclick="respostaSim()">💖 SIM</button>
+  <button id="btnNao">💔 NÃO</button>
+</div>
+
+<!-- RESULTADO -->
+<div id="mensagem-amor" style="display:none;">EU TE AMO ❤️</div>
+<canvas id="confete"></canvas>
+
+<button onclick="back()">Voltar</button>
 </div>
 
 </div>
@@ -446,8 +454,13 @@ function toggleCarta() {
 }
 
 function abrirPresente() {
+ function mostrarEscolha() {
+  document.getElementById("escolha").style.display = "block";
+}
+
+function respostaSim() {
   document.getElementById("mensagem-amor").style.display = "block";
-vibrar();
+
   const canvas = document.getElementById("confete");
   const ctx = canvas.getContext("2d");
 
@@ -528,6 +541,21 @@ document.addEventListener("click", () => {
     frase.classList.add("mostrar");
   }
 });
+  setTimeout(() => {
+  const btnNao = document.getElementById("btnNao");
+
+  btnNao.addEventListener("click", () => {
+    if (paginaAtual === "final") {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+
+      btnNao.style.position = "fixed";
+      btnNao.style.left = x + "px";
+      btnNao.style.top = y + "px";
+    }
+  });
+}, 500);
+
 </script>
 
 </body>
