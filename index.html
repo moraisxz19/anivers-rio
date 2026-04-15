@@ -271,10 +271,6 @@ header {
 </head>
 
 <body>
-</style>
-</head>
-
-<body>
 
 <audio id="musica" loop>
   <source src="musica.mp3" type="audio/mpeg">
@@ -403,19 +399,13 @@ No fim, não tem frase perfeita pra explicar, só sei que com você, até o simp
 
 <script>
 let paginaAtual = "menu";
-
-function showPage(id) {
-  paginaAtual = id;
-  function toggleMusica() {
+function toggleMusica() {
   const musica = document.getElementById("musica");
   const botao = document.getElementById("botaoMusica");
-
   musica.volume = 0.5;
 
   if (musica.paused) {
-    musica.play().catch(() => {
-      alert("Clique novamente para iniciar a música 🎵");
-    });
+    musica.play();
     botao.innerHTML = "⏸️";
   } else {
     musica.pause();
@@ -424,6 +414,7 @@ function showPage(id) {
 }
 
 function showPage(id) {
+  paginaAtual = id;
   document.getElementById('menu').style.display = 'none';
   document.getElementById('headerPrincipal').style.display = 'none';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
