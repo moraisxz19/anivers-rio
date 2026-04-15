@@ -277,13 +277,12 @@ header {
 <body>
 
 <audio id="musica" loop>
-  <source src="musica.mp3.mp3" type="audio/mpeg">
+  <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
 <div id="botaoMusica" onclick="toggleMusica()">▶️</div>
 <div id="intro">
   <h1>Feliz Aniversário Meu Amor ❤️<br>15 anos 🎉</h1>
-  <div id="botaoMusica" onclick="toggleMusica()">🎵</div>
   <p>Prepare-se para uma surpresa...</p>
 </div>
 
@@ -407,6 +406,24 @@ let paginaAtual = "menu";
 
 function showPage(id) {
   paginaAtual = id;
+  function toggleMusica() {
+  const musica = document.getElementById("musica");
+  const botao = document.getElementById("botaoMusica");
+
+  musica.volume = 0.5;
+
+  if (musica.paused) {
+    musica.play().catch(() => {
+      alert("Clique novamente para iniciar a música 🎵");
+    });
+    botao.innerHTML = "⏸️";
+  } else {
+    musica.pause();
+    botao.innerHTML = "▶️";
+  }
+}
+
+function showPage(id) {
   document.getElementById('menu').style.display = 'none';
   document.getElementById('headerPrincipal').style.display = 'none';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
